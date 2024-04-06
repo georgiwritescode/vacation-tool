@@ -6,14 +6,6 @@ import (
 	"strconv"
 )
 
-type Vacation struct {
-	ID       int    `json:"id"`
-	Label    string `json:"label"`
-	FromDate string `json:"fromDate"`
-	ToDate   string `json:"toDate"`
-	PersonId int    `json:"personId"`
-}
-
 type Handler struct{}
 
 var vacations []Vacation = []Vacation{

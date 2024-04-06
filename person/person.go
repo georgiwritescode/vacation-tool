@@ -8,14 +8,6 @@ import (
 
 type Handler struct{}
 
-type Person struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Age       int    `json:"age"`
-	Email     string `json:"email"`
-}
-
 var persons []Person = []Person{
 	{ID: 1, FirstName: "John", LastName: "Doe", Age: 30, Email: "john.doe@example.com"},
 	{ID: 2, FirstName: "Alice", LastName: "Smith", Age: 25, Email: "alice.smith@example.com"},
