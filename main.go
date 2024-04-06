@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/georgiwritescode/vacation-tool/db"
 	"github.com/georgiwritescode/vacation-tool/person"
 	"github.com/georgiwritescode/vacation-tool/vacation"
 )
 
 func main() {
+
+	db.InitDB()
 
 	mux := http.NewServeMux()
 	personHandler := &person.Handler{}
