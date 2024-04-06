@@ -26,10 +26,10 @@ func main() {
 
 	//vacation router
 	mux.HandleFunc("GET /vacation/{id}", vacationHandler.FindById)
-	// mux.HandleFunc("GET /vacation/list", personHandler.FindById)
-	// mux.HandleFunc("POST /vacation/create", personHandler.Create)
-	// mux.HandleFunc("PUT /vacation/update", personHandler.Create)
-	// mux.HandleFunc("DELETE /vacation/delete", personHandler.Create)
+	mux.HandleFunc("GET /vacation/list", vacationHandler.FindAll)
+	mux.HandleFunc("POST /vacation/create", vacationHandler.Create)
+	mux.HandleFunc("PUT /vacation/update/{id}", vacationHandler.Update)
+	mux.HandleFunc("DELETE /vacation/delete/{id}", vacationHandler.Delete)
 
 	server := http.Server{
 		Addr:    ":8080",
