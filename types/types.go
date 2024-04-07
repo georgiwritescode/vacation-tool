@@ -1,11 +1,12 @@
 package types
 
 type Vacation struct {
-	ID       int    `json:"id"`
-	Label    string `json:"label"`
-	FromDate string `json:"fromDate"`
-	ToDate   string `json:"toDate"`
-	PersonId int    `json:"personId"`
+	ID        int    `json:"id"`
+	Label     string `json:"label"`
+	FromDate  string `json:"fromDate"`
+	ToDate    string `json:"toDate"`
+	PersonId  int    `json:"personId"`
+	Timestamp string `json:"ts"`
 }
 
 type User struct {
@@ -23,8 +24,8 @@ type UserStore interface {
 
 type VacationStore interface {
 	FindById(int) (*Vacation, error)
-	FindAll() ([]*Vacation, error)
-	CreateVacation(*Vacation) (*Vacation, error)
-	UpdateVacation(*Vacation) (*Vacation, error)
-	DeleteVacation(int) error
+	// FindAll() ([]*Vacation, error)
+	// CreateVacation(*Vacation) (*Vacation, error)
+	// UpdateVacation(*Vacation) (*Vacation, error)
+	// DeleteVacation(int) error
 }

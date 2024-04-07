@@ -8,7 +8,7 @@ import (
 	"github.com/georgiwritescode/vacation-tool/types"
 )
 
-type Handler struct{}
+// type Handler struct{}
 
 var vacations []types.Vacation = []types.Vacation{
 	{ID: 1, Label: "Vacation 1", FromDate: "2024-04-06", ToDate: "2024-04-10", PersonId: 1},

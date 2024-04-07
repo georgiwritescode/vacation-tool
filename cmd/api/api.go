@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/georgiwritescode/vacation-tool/service/user"
+	"github.com/georgiwritescode/vacation-tool/service/vacation"
 )
 
 type ApiServer struct {
@@ -27,6 +28,10 @@ func (s *ApiServer) Run() error {
 	userStore := user.NewStore(s.db)
 	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(router)
+
+	vacationStore := vacation.NewStore(s.db)
+	vacationHandler := vacation.NewHandler(vacationStore)
+	vacationHandler.RegisterRoutes(router)
 
 	return http.ListenAndServe(s.addr, router)
 }
