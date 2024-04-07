@@ -22,7 +22,6 @@ func NewApiServer(addr string, db *sql.DB) *ApiServer {
 }
 
 func (s *ApiServer) Run() error {
-	log.Println("server port", s.addr)
 	router := http.NewServeMux()
 
 	userStore := user.NewStore(s.db)
@@ -33,5 +32,6 @@ func (s *ApiServer) Run() error {
 	vacationHandler := vacation.NewHandler(vacationStore)
 	vacationHandler.RegisterRoutes(router)
 
+	log.Println("Server listening on port", s.addr)
 	return http.ListenAndServe(s.addr, router)
 }

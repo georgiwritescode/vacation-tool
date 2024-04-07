@@ -1,6 +1,8 @@
 package configs
 
-import "github.com/joho/godotenv"
+import (
+	"os"
+)
 
 type Config struct {
 	PublicHost string
@@ -14,15 +16,21 @@ type Config struct {
 var Envs = initConfigs()
 
 func initConfigs() Config {
-	godotenv.Load()
 
-	//todo: implement some sort of reading from .env file
 	return Config{
-		PublicHost: "http://localhost",
-		Port:       ":8080",
-		DBUser:     "portal",
-		DBPassword: "password123",
-		DBAddress:  "127.0.0.1:3306",
-		DBName:     "vacation_tool",
+		PublicHost: getEnv("HOST", "localhost"),
+		Port:       getEnv("PORT", ":8080"),
+		DBUser:     getEnv("DB_User", "portal"),
+		DBPassword: getEnv("DB_Password", "password123"),
+		DBAddress:  getEnv("DB_Address", "127.0.0.1:3306"),
+		DBName:     getEnv("DB_Name", "vacation_tool"),
 	}
+}
+
+func getEnv(key, fallback string) string {
+	if value, err := os.LookupEnv(key); err {
+		return value
+	}
+
+	return fallback
 }
