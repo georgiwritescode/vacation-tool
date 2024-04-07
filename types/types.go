@@ -20,6 +20,8 @@ type User struct {
 
 type UserStore interface {
 	FindById(id int) (*User, error)
+	CreateUser(user *User) (int, error)
+	FetchAllUsers() ([]*User, error)
 }
 
 type VacationStore interface {
