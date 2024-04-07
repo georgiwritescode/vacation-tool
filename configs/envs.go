@@ -16,6 +16,7 @@ var Envs = initConfigs()
 func initConfigs() Config {
 	godotenv.Load()
 
+	//todo: implement some sort of reading from .env file
 	return Config{
 		PublicHost: "http://localhost",
 		Port:       ":8080",
