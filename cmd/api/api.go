@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/georgiwritescode/vacation-tool/middleware"
 	"github.com/georgiwritescode/vacation-tool/service/user"
 	"github.com/georgiwritescode/vacation-tool/service/vacation"
 )
@@ -33,5 +34,15 @@ func (s *ApiServer) Run() error {
 	vacationHandler.RegisterRoutes(router)
 
 	log.Println("Server listening on port", s.addr)
-	return http.ListenAndServe(s.addr, router)
+
+	stack := middleware.CreateStack(
+		middleware.Loogging,
+	)
+
+	server := http.Server{
+		Addr:    s.addr,
+		Handler: stack(router),
+	}
+
+	return server.ListenAndServe()
 }
