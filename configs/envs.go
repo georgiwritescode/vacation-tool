@@ -22,7 +22,7 @@ func initConfigs() Config {
 		Port:       getEnv("PORT", ":8080"),
 		DBUser:     getEnv("DB_User", "portal"),
 		DBPassword: getEnv("DB_Password", "password123"),
-		DBAddress:  getEnv("DB_Address", "127.0.0.1:3306"),
+		DBAddress:  getEnv("DB_Address", "127.0.0.1:3307"),
 		DBName:     getEnv("DB_Name", "vacation_tool"),
 	}
 }

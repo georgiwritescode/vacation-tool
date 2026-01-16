@@ -1,9 +1,7 @@
 package user
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -23,6 +21,39 @@ func (h *Handler) RegisterRoutes(router *http.ServeMux) {
 	router.HandleFunc("GET /users/{id}", h.HandleGetByID)
 	router.HandleFunc("GET /users/list", h.HandleListAllUsers)
 	router.HandleFunc("POST /users/create", h.HandleCreateUser)
+	router.HandleFunc("PUT /users/update", h.HandleUpdateUser)
+	router.HandleFunc("DELETE /users/delete/{id}", h.HandleDeleteUser)
+}
+
+func (h *Handler) HandleUpdateUser(w http.ResponseWriter, r *http.Request) {
+	var user types.User
+	if err := utils.ParseJSON(r, &user); err != nil {
+		utils.WriteError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	if err := h.store.UpdateUser(&user); err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	utils.WriteJSON(w, http.StatusOK, map[string]string{"status": "updated"})
+}
+
+func (h *Handler) HandleDeleteUser(w http.ResponseWriter, r *http.Request) {
+	pathValue := r.PathValue("id")
+	id, err := strconv.Atoi(pathValue)
+	if err != nil {
+		utils.WriteError(w, http.StatusBadRequest, fmt.Errorf("invalid user id: %v", err))
+		return
+	}
+
+	if err := h.store.DeleteUser(id); err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	utils.WriteJSON(w, http.StatusOK, map[string]string{"status": "deleted"})
 }
 
 func (h *Handler) HandleGetByID(w http.ResponseWriter, r *http.Request) {
@@ -30,15 +61,17 @@ func (h *Handler) HandleGetByID(w http.ResponseWriter, r *http.Request) {
 	pathValue := r.PathValue("id")
 	id, err := strconv.Atoi(pathValue)
 	if err != nil {
-		log.Fatal(err)
+		utils.WriteError(w, http.StatusBadRequest, fmt.Errorf("invalid user id: %v", err))
+		return
 	}
 
 	user, err := h.store.FindById(id)
 	if err != nil {
-		log.Fatal(err)
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
 	}
 
-	json.NewEncoder(w).Encode(user)
+	utils.WriteJSON(w, http.StatusOK, user)
 }
 
 func (h *Handler) HandleCreateUser(w http.ResponseWriter, r *http.Request) {
@@ -50,12 +83,14 @@ func (h *Handler) HandleCreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := h.store.CreateUser(&types.User{
-		ID:        user.ID,
-		FirstName: user.FirstName,
-		LastName:  user.LastName,
-		Age:       user.Age,
-		Email:     user.Email,
-		Timestamp: user.Timestamp,
+		ID:           user.ID,
+		FirstName:    user.FirstName,
+		LastName:     user.LastName,
+		Age:          user.Age,
+		Email:        user.Email,
+		VacationDays: user.VacationDays,
+		NonPaidLeave: user.NonPaidLeave,
+		Timestamp:    user.Timestamp,
 	})
 	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
