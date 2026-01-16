@@ -1,0 +1,27 @@
+{{define "title"}}Vacation Details - Vacation Tool{{end}}
+
+{{define "content"}}
+<h1>{{.Label}}</h1>
+
+<div class="card">
+    <h2>Vacation Details</h2>
+    <table>
+        <tr>
+            <td style="font-weight: bold; width: 200px;">Employee ID:</td>
+            <td>{{.PersonId}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">From Date:</td>
+            <td>{{.FromDate}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">To Date:</td>
+            <td>{{.ToDate}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Days Used:</td>
+            <td><strong>{{.DaysUsed}}</strong></td>
+        </tr>
+    </table>
+</div>
+{{end}}

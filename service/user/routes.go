@@ -18,11 +18,11 @@ func NewHandler(store types.UserStore) *Handler {
 }
 
 func (h *Handler) RegisterRoutes(router *http.ServeMux) {
-	router.HandleFunc("GET /users/{id}", h.HandleGetByID)
-	router.HandleFunc("GET /users/list", h.HandleListAllUsers)
-	router.HandleFunc("POST /users/create", h.HandleCreateUser)
-	router.HandleFunc("PUT /users/update", h.HandleUpdateUser)
-	router.HandleFunc("DELETE /users/delete/{id}", h.HandleDeleteUser)
+	router.HandleFunc("GET /api/v1/users/{id}", h.HandleGetByID)
+	router.HandleFunc("GET /api/v1/users/list", h.HandleListAllUsers)
+	router.HandleFunc("POST /api/v1/users/create", h.HandleCreateUser)
+	router.HandleFunc("PUT /api/v1/users/update", h.HandleUpdateUser)
+	router.HandleFunc("DELETE /api/v1/users/delete/{id}", h.HandleDeleteUser)
 }
 
 func (h *Handler) HandleUpdateUser(w http.ResponseWriter, r *http.Request) {

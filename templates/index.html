@@ -1,0 +1,21 @@
+{{define "title"}}Dashboard - Vacation Tool{{end}}
+
+{{define "content"}}
+<h1>Welcome to Vacation Tool</h1>
+
+
+<div class="card">
+    <h2>Who is on Vacation Today?</h2>
+    {{if .ActiveVacations}}
+    <ul>
+        {{range .ActiveVacations}}
+        <li><strong>{{.UserName}}</strong> ({{.Label}}): {{.Dates}}</li>
+        {{end}}
+    </ul>
+    {{else}}
+    <p>No one is on vacation today! 🏝️ -> 🏢</p>
+    {{end}}
+</div>
+
+
+{{end}}

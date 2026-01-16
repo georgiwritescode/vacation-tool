@@ -1,0 +1,53 @@
+{{define "title"}}{{if .User.ID}}Edit User{{else}}New User{{end}} - Vacation Tool{{end}}
+
+{{define "content"}}
+<h1>{{if .User.ID}}Edit User{{else}}Create New User{{end}}</h1>
+
+<div class="card">
+    <form method="POST">
+        <div style="margin-bottom: 1rem;">
+            <label for="first_name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">First Name</label>
+            <input type="text" id="first_name" name="first_name" value="{{.User.FirstName}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="last_name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="{{.User.LastName}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="age" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Age</label>
+            <input type="number" id="age" name="age" value="{{.User.Age}}" required min="18" max="100"
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email</label>
+            <input type="email" id="email" name="email" value="{{.User.Email}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="vacation_days" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Vacation
+                Days</label>
+            <input type="number" id="vacation_days" name="vacation_days"
+                value="{{if .User.VacationDays}}{{.User.VacationDays}}{{else}}20{{end}}" required min="0"
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="non_paid_leave" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Non-Paid Leave
+                Days</label>
+            <input type="number" id="non_paid_leave" name="non_paid_leave" value="{{.User.NonPaidLeave}}" required
+                min="0" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn">{{if .User.ID}}Update User{{else}}Create User{{end}}</button>
+            <a href="/users" class="btn" style="background: #6c757d; margin-left: 10px;">Cancel</a>
+        </div>
+    </form>
+</div>
+{{end}}

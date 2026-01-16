@@ -8,6 +8,7 @@ import (
 	"github.com/georgiwritescode/vacation-tool/middleware"
 	"github.com/georgiwritescode/vacation-tool/service/user"
 	"github.com/georgiwritescode/vacation-tool/service/vacation"
+	"github.com/georgiwritescode/vacation-tool/service/web"
 )
 
 type ApiServer struct {
@@ -32,6 +33,9 @@ func (s *ApiServer) Run() error {
 	vacationStore := vacation.NewStore(s.db)
 	vacationHandler := vacation.NewHandler(vacationStore)
 	vacationHandler.RegisterRoutes(router)
+
+	webHandler := web.NewHandler(userStore, vacationStore)
+	webHandler.RegisterRoutes(router)
 
 	log.Println("Server listening on port", s.addr)
 

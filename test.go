@@ -68,7 +68,7 @@ func runUserFeaturesTest() {
 	// 2. Update User
 	u.ID = userID
 	u.FirstName = "UpdatedFeat"
-	_, status := makeRequest("PUT", "/users/update", u)
+	_, status := makeRequest("PUT", "/api/v1/users/update", u)
 	assert(status == 200, "Update User status 200")
 
 	// 3. Verify Update
@@ -76,12 +76,12 @@ func runUserFeaturesTest() {
 	assert(fetched.FirstName == "UpdatedFeat", "User firstname updated")
 
 	// 4. Delete User
-	_, status = makeRequest("DELETE", fmt.Sprintf("/users/delete/%d", userID), nil)
+	_, status = makeRequest("DELETE", fmt.Sprintf("/api/v1/users/delete/%d", userID), nil)
 	assert(status == 200, "Delete User status 200")
 
 	// 5. Verify Delete (Expect 500 or 400 with 'not found' or similar, currently API returns 500/error string for not found if using FindById check)
 	// API FindById returns error "user not found"
-	_, status = makeRequest("GET", fmt.Sprintf("/users/%d", userID), nil)
+	_, status = makeRequest("GET", fmt.Sprintf("/api/v1/users/%d", userID), nil)
 	// Depending on implementation, might be 500.
 	// user/store.go returns error, middleware might map it.
 	fmt.Printf("    Get Deleted User Status: %d (Expected failure)\n", status)
@@ -194,7 +194,7 @@ func makeRequest(method, urlPath string, body interface{}) ([]byte, int) {
 }
 
 func createUser(u User) int {
-	data, status := makeRequest("POST", "/users/create", u)
+	data, status := makeRequest("POST", "/api/v1/users/create", u)
 	if status != 200 {
 		fmt.Printf("Create User failed: %s\n", string(data))
 		os.Exit(1)
@@ -215,7 +215,7 @@ func createUser(u User) int {
 }
 
 func getUser(id int) *User {
-	data, status := makeRequest("GET", fmt.Sprintf("/users/%d", id), nil)
+	data, status := makeRequest("GET", fmt.Sprintf("/api/v1/users/%d", id), nil)
 	if status != 200 {
 		fmt.Printf("Get User %d failed: %s\n", id, string(data))
 		os.Exit(1)
@@ -234,5 +234,5 @@ func createVacation(v Vacation) {
 }
 
 func createVacationRaw(v Vacation) ([]byte, int) {
-	return makeRequest("POST", "/vacations/create", v)
+	return makeRequest("POST", "/api/v1/vacations/create", v)
 }

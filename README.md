@@ -1,7 +1,7 @@
 # Vacation Tool
 
 ## Purpose
-The **Vacation Tool** is a robust backend service designed to streamline the management of employee leave. It handles user profiles and vacation requests with intelligent balance tracking, ensuring accurate accounting of paid and non-paid leave.
+The **Vacation Tool** is a comprehensive application designed to streamline the management of employee leave. It features a **Web Dashboard** for easy management and a **robust JSON API** for integration. It handles user profiles and vacation requests with intelligent balance tracking, ensuring accurate accounting of paid and non-paid leave.
 
 ## Key Features
 
@@ -12,11 +12,18 @@ The **Vacation Tool** is a robust backend service designed to streamline the man
     *   **Vacation Days (Paid)**: Standard paid time off (Default: 20 days).
     *   **Non-Paid Leave (Unpaid)**: Additional unpaid days off (Default: 0).
 
-### 2. Vacation Tracking
+### 2. Web Interface
+Use the browser to view and manage data:
+*   **Dashboard** (`http://localhost:8080/`): Overview and quick links.
+*   **Employees** (`http://localhost:8080/users`): List of all employees and their balances.
+*   **Vacations** (`http://localhost:8080/vacations`): List of all scheduled vacations.
+
+### 3. API & Vacation Tracking
+*   **JSON API**: All data endpoints are namespaced under `/api/v1/`.
 *   **Vacation Requests**: Users can request vacations with specific dates and duration.
 *   **History**: Full history of vacations is linked to each user.
 
-### 3. Smart Deduction Logic
+### 4. Smart Deduction Logic
 The system enforces strict business rules for leave consumption:
 1.  **Deduct Paid First**: Requests automatically consume `Vacation Days` first.
 2.  **Fallback to Unpaid**: If `Vacation Days` are exhausted, the remaining duration is deducted from `Non-Paid Leave`.

@@ -1,0 +1,51 @@
+{{define "title"}}{{if .Vacation.ID}}Edit Vacation{{else}}New Vacation{{end}} - Vacation Tool{{end}}
+
+{{define "content"}}
+<h1>{{if .Vacation.ID}}Edit Vacation{{else}}Create New Vacation{{end}}</h1>
+
+<div class="card">
+    <form method="POST">
+        <div style="margin-bottom: 1rem;">
+            <label for="label" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Label</label>
+            <input type="text" id="label" name="label" value="{{.Vacation.Label}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="person_id" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Employee</label>
+            <select id="person_id" name="person_id" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">Select an employee...</option>
+                {{range .Users}}
+                <option value="{{.ID}}" {{if eq .ID $.Vacation.PersonId}}selected{{end}}>
+                    {{.FirstName}} {{.LastName}}
+                </option>
+                {{end}}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="from_date" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">From Date</label>
+            <input type="date" id="from_date" name="from_date" value="{{.Vacation.FromDate}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="to_date" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">To Date</label>
+            <input type="date" id="to_date" name="to_date" value="{{.Vacation.ToDate}}" required
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="days_used" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Days Used</label>
+            <input type="number" id="days_used" name="days_used" value="{{.Vacation.DaysUsed}}" required min="1"
+                style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn">{{if .Vacation.ID}}Update Vacation{{else}}Create Vacation{{end}}</button>
+            <a href="/vacations" class="btn" style="background: #6c757d; margin-left: 10px;">Cancel</a>
+        </div>
+    </form>
+</div>
+{{end}}

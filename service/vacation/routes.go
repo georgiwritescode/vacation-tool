@@ -19,11 +19,11 @@ func NewHandler(store types.VacationStore) *Handler {
 }
 
 func (h *Handler) RegisterRoutes(router *http.ServeMux) {
-	router.HandleFunc("GET /vacations/{id}", h.HandleGetByID)
-	router.HandleFunc("GET /vacations/list", h.HandleListVacations)
-	router.HandleFunc("POST /vacations/create", h.HandleCreateVacation)
-	router.HandleFunc("PUT /vacations/update", h.HandleUpdateVacation)
-	router.HandleFunc("DELETE /vacations/delete/{id}", h.HandleDeleteVacation)
+	router.HandleFunc("GET /api/v1/vacations/{id}", h.HandleGetByID)
+	router.HandleFunc("GET /api/v1/vacations/list", h.HandleListVacations)
+	router.HandleFunc("POST /api/v1/vacations/create", h.HandleCreateVacation)
+	router.HandleFunc("PUT /api/v1/vacations/update", h.HandleUpdateVacation)
+	router.HandleFunc("DELETE /api/v1/vacations/delete/{id}", h.HandleDeleteVacation)
 }
 
 func (h *Handler) HandleGetByID(w http.ResponseWriter, r *http.Request) {

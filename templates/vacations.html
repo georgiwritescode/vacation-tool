@@ -1,0 +1,48 @@
+{{define "title"}}Vacations - Vacation Tool{{end}}
+
+{{define "content"}}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Vacation Requests</h1>
+    <a href="/vacations/new" class="btn">Add Request</a>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Label</th>
+                <th>Employee ID</th>
+                <th>Dates</th>
+                <th>Days Used</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Label}}</td>
+                <td>{{.PersonId}}</td>
+                <td>{{.FromDate}} - {{.ToDate}}</td>
+                <td><strong>{{.DaysUsed}}</strong></td>
+                <td>
+                    <a href="/vacations/{{.ID}}" class="btn" style="font-size: 0.875rem; padding: 4px 8px;">View</a>
+                    <a href="/vacations/{{.ID}}/edit" class="btn"
+                        style="font-size: 0.875rem; padding: 4px 8px; background: #28a745; margin-left: 5px;">Edit</a>
+                    <form method="POST" action="/vacations/{{.ID}}/delete" style="display: inline; margin-left: 5px;"
+                        onsubmit="return confirm('Delete this vacation?');">
+                        <button type="submit" class="btn"
+                            style="font-size: 0.875rem; padding: 4px 8px; background: #dc3545;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="6" style="text-align: center;">No vacations found.</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}

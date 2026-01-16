@@ -1,0 +1,51 @@
+{{define "title"}}User Details - Vacation Tool{{end}}
+
+{{define "content"}}
+<h1>{{.FirstName}} {{.LastName}}</h1>
+
+<div class="card">
+    <h2>Personal Information</h2>
+    <table>
+        <tr>
+            <td style="font-weight: bold; width: 200px;">Email:</td>
+            <td>{{.Email}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Age:</td>
+            <td>{{.Age}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Vacation Days:</td>
+            <td><strong>{{.VacationDays}}</strong></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Non-Paid Leave:</td>
+            <td>{{.NonPaidLeave}}</td>
+        </tr>
+    </table>
+</div>
+
+{{if .Vacations}}
+<div class="card">
+    <h2>Vacation History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Dates</th>
+                <th>Days Used</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Vacations}}
+            <tr>
+                <td>{{.Label}}</td>
+                <td>{{.FromDate}} to {{.ToDate}}</td>
+                <td>{{.DaysUsed}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+{{end}}

@@ -1,0 +1,48 @@
+{{define "title"}}Users - Vacation Tool{{end}}
+
+{{define "content"}}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Employees</h1>
+    <a href="/users/new" class="btn">Add Employee</a>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Vacation Days</th>
+                <th>Non-Paid Used</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.FirstName}} {{.LastName}}</td>
+                <td>{{.Email}}</td>
+                <td><strong>{{.VacationDays}}</strong></td>
+                <td>{{.NonPaidLeave}}</td>
+                <td>
+                    <a href="/users/{{.ID}}" class="btn" style="font-size: 0.875rem; padding: 4px 8px;">View</a>
+                    <a href="/users/{{.ID}}/edit" class="btn"
+                        style="font-size: 0.875rem; padding: 4px 8px; background: #28a745; margin-left: 5px;">Edit</a>
+                    <form method="POST" action="/users/{{.ID}}/delete" style="display: inline; margin-left: 5px;"
+                        onsubmit="return confirm('Delete this user?');">
+                        <button type="submit" class="btn"
+                            style="font-size: 0.875rem; padding: 4px 8px; background: #dc3545;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="6" style="text-align: center;">No employees found.</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}

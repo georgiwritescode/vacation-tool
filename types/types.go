@@ -36,4 +36,5 @@ type VacationStore interface {
 	CreateVacation(*Vacation) (int, error)
 	UpdateVacation(*Vacation) error
 	DeleteVacation(int) error
+	GetActiveVacations(string) ([]*Vacation, error)
 }
