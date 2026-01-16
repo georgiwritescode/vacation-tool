@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mariadb:
+  db:
     image: mariadb
     restart: always
     environment:
@@ -13,6 +13,21 @@ services:
       - "3307:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USER: portal
+      DB_PASSWORD: password123
+      DB_ADDRESS: db:3306
+      DB_NAME: vacation_tool
+      PORT: :8080
+    depends_on:
+      - db
 
 volumes:
   mariadb_data:

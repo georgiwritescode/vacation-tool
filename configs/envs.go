@@ -20,10 +20,10 @@ func initConfigs() Config {
 	return Config{
 		PublicHost: getEnv("HOST", "localhost"),
 		Port:       getEnv("PORT", ":8080"),
-		DBUser:     getEnv("DB_User", "portal"),
-		DBPassword: getEnv("DB_Password", "password123"),
-		DBAddress:  getEnv("DB_Address", "127.0.0.1:3307"),
-		DBName:     getEnv("DB_Name", "vacation_tool"),
+		DBUser:     getEnv("DB_USER", "portal"),
+		DBPassword: getEnv("DB_PASSWORD", "password123"),
+		DBAddress:  getEnv("DB_ADDRESS", "127.0.0.1:3307"),
+		DBName:     getEnv("DB_NAME", "vacation_tool"),
 	}
 }
 

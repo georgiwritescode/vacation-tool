@@ -42,9 +42,24 @@ The system enforces strict business rules for leave consumption:
 
 ### Running the Application
 
+#### Option 1: Docker (Recommended)
+The easiest way to run the application is using Docker Compose, which will start both the database and application:
+
+```bash
+docker-compose up -d
+```
+
+The application will be available at `http://localhost:8080`.
+
+To stop the application:
+```bash
+docker-compose down
+```
+
+#### Option 2: Local Development
 1.  **Start the Database**:
     ```bash
-    docker-compose up -d
+    docker-compose up -d db
     ```
 
 2.  **Run the Server**:
